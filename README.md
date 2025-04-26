@@ -1,4 +1,4 @@
-# Habitual E-commerce Portal
+# Celeste E-commerce Portal
 
 Web platform to manage mobile application data. Currently application include CRUD operations for all sort of sections & features like order tracking, notifications & product color variants,etc. in loop.
 
