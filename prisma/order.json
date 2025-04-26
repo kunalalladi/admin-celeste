@@ -1,0 +1,105 @@
+[
+    {
+      "_id": {
+        "$oid": "65c629cacd9abc0299198f2a"
+      },
+      "details": [
+        {
+          "productId": "65b629cacd9abc0299198f1a",
+          "title": "Floral Summer Dress",
+          "quantity": 2,
+          "size": "M",
+          "color": "Blue Floral",
+          "price": 79.99,
+          "discount": 15.00
+        }
+      ],
+      "userId": "67a629cacd9abc0299198e4d",
+      "orderId": "ORD-2024-001",
+      "transactionId": "txn_1234567890",
+      "address": {
+        "street": "123 Admin Street",
+        "city": "Tech City",
+        "country": "United States",
+        "zipCode": "12345"
+      },
+      "amount": 144.98,
+      "status": "SUCCESS",
+      "orderStatus": "DELIVERED",
+      "receiptUrl": "https://example.com/receipt/txn_1234567890",
+      "productIds": ["65b629cacd9abc0299198f1a"],
+      "createdAt": {"$date": "2024-02-07T00:00:00Z"},
+      "updatedAt": {"$date": "2024-02-07T00:00:00Z"}
+    },
+    {
+      "_id": {
+        "$oid": "65c629cacd9abc0299198f2b"
+      },
+      "details": [
+        {
+          "productId": "65b629cacd9abc0299198f1c",
+          "title": "Minimalist Shirt",
+          "quantity": 1,
+          "length": "18 inches",
+          "price": 49.99,
+          "discount": 10.00
+        }
+      ],
+      "userId": "67a629cacd9abc0299198e4d",
+      "orderId": "ORD-2024-002",
+      "transactionId": "txn_0987654321",
+      "address": {
+        "street": "123 Admin Street",
+        "city": "Tech City",
+        "country": "United States",
+        "zipCode": "12345"
+      },
+      "amount": 39.99,
+      "status": "PENDING",
+      "orderStatus": "INPROCESS",
+      "receiptUrl": null,
+      "productIds": ["65b629cacd9abc0299198f1c"],
+      "createdAt": {"$date": "2024-02-07T10:00:00Z"},
+      "updatedAt": {"$date": "2024-02-07T10:00:00Z"}
+    },
+    {
+      "_id": {
+        "$oid": "65c629cacd9abc0299198f2c"
+      },
+      "details": [
+        {
+          "productId": "65b629cacd9abc0299198f1a",
+          "title": "Floral Summer Dress",
+          "quantity": 1,
+          "size": "S",
+          "color": "Pink Floral",
+          "price": 79.99,
+          "discount": 15.00
+        },
+        {
+          "productId": "65b629cacd9abc0299198f1c",
+          "title": "Minimalist Shirt",
+          "quantity": 2,
+          "length": "16 inches",
+          "price": 49.99,
+          "discount": 10.00
+        }
+      ],
+      "userId": "67a629cacd9abc0299198e4d",
+      "orderId": "ORD-2024-003",
+      "transactionId": "txn_1122334455",
+      "address": {
+        "street": "123 Admin Street",
+        "city": "Tech City",
+        "country": "United States",
+        "zipCode": "12345"
+      },
+      "amount": 154.97,
+      "status": "SUCCESS",
+      "orderStatus": "SHIPPED",
+      "receiptUrl": "https://example.com/receipt/txn_1122334455",
+      "productIds": ["65b629cacd9abc0299198f1a", "65b629cacd9abc0299198f1c"],
+      "createdAt": {"$date": "2024-02-07T15:00:00Z"},
+      "updatedAt": {"$date": "2024-02-07T15:00:00Z"}
+    }
+  ]

@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+ 
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = "mongodb://localhost:27017/habitual_ecommerce"
+ 
+}
+
+model User {
+  id                  String         @id @default(auto()) @map("_id") @db.ObjectId
+  email               String         @unique
+  password            String
+  fullname            String?
+  profile             String?
+  profileImageId      String?
+  bio                 String?
+  joining_reasons     String[]
+  stripe_customer_id  String
+  addresses           Json[]
+  isAdmin             Boolean?       @default(false)
+  interestIds         String[]       @db.ObjectId
+  interests           Category[]     @relation(fields: [interestIds], references: [id])
+  favouriteProductIds String[]       @db.ObjectId
+  favouriteProducts   Product[]      @relation(fields: [favouriteProductIds], references: [id])
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @default(now())
+  Transactions        Transactions[]
+}
+
+model Category {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  parentId          String?
+  parentCategory    Category?  @relation("CategoryParent", fields: [parentId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  subCategory       Category[] @relation("CategoryParent")
+  interestedUserIds String[]   @db.ObjectId
+  interestedUsers   User[]     @relation(fields: [interestedUserIds], references: [id])
+  productIds        String[]   @db.ObjectId
+  products          Product[]  @relation(fields: [productIds], references: [id])
+  image             String?
+  categoryImageId   String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @default(now())
+}
+
+model Product {
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  title             String     @unique
+  description       String?
+  images            Json[]
+  variants          Json?      // Can store multiple variations like sizes, colors
+  sizes             String[]   // ["S", "M", "L", "XL"]
+  keyFeatures       String[]   // ["Feature 1", "Feature 2", "Feature 3"]
+  careInstructions  String?    // "Hand wash only. Do not bleach."
+  specifications    Json?      // { "Material": "Premium", "Weight": "250g", "Origin": "USA" }
+  slideColors       Json[]
+  price             Float
+  discount          Float?     @default(0)
+  quantity          Int
+  categoryIds       String[]   @db.ObjectId
+  category          Category[] @relation(fields: [categoryIds], references: [id])
+  addedInFavUserIds String[]   @db.ObjectId
+  addedInFavUsers   User[]     @relation(fields: [addedInFavUserIds], references: [id])
+  isStaffPick       Boolean?   @default(false)
+  isFeatured        Boolean?   @default(false)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @default(now())
+}
+
+
+model ImageEmbedding {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId    String   @db.ObjectId
+  product      Product  @relation(fields: [productId], references: [id])
+  imagePath    String   // Store the path to the image
+  embedding    Json     // Store the embedding vector as Json
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+}
+
+
+
+enum Status {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum OrderStatus {
+  INPROCESS
+  SHIPPED
+  DELIVERED
+}
+
+model Transactions {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  details       Json[]
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String      @db.ObjectId
+  orderId       String
+  transactionId String
+  address       Json
+  amount        Float
+  status        Status      @default(PENDING)
+  orderStatus   OrderStatus @default(INPROCESS)
+  productIds    String[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())
+}
